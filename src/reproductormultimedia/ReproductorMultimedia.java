@@ -4,17 +4,30 @@
  */
 package reproductormultimedia;
 
+import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
  * @author tarde
  */
 public class ReproductorMultimedia extends javax.swing.JFrame {
-    
+
+    private ImageIcon iIconPausar = new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/2.png");
+    private ImageIcon iIconReproducir = new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/1.png");
+
+    private boolean aparecer = true;
+    private boolean desplegadoVolumen = true;
+    private boolean reproduciendo = true;
+    Color a = new Color(0, 102, 51);
+    private boolean minimizado = false;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReproductorMultimedia.class.getName());
 
     /**
@@ -33,287 +46,376 @@ public class ReproductorMultimedia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
+        jPBotonera = new javax.swing.JPanel();
+        jButtonTurnoff = new javax.swing.JButton();
+        jButtonVolume = new javax.swing.JButton();
+        jSVolumen = new javax.swing.JSlider();
+        jButtonStop = new javax.swing.JButton();
+        jButtonForward = new javax.swing.JButton();
+        jButtonRewind = new javax.swing.JButton();
+        jButtonSkip = new javax.swing.JButton();
+        jButtonRestart = new javax.swing.JButton();
+        jButtonPlayPause = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jMaximizar = new javax.swing.JButton();
+        jMinimizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanelFalso = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMIAbrir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/1.png"))); // NOI18N
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jPBotonera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPBotoneraMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPBotoneraMouseExited(evt);
+            }
+        });
+        jPBotonera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonTurnoff.setBackground(new java.awt.Color(255, 51, 0));
+        jButtonTurnoff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/on-off-button.png"))); // NOI18N
+        jButtonTurnoff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonTurnoffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonTurnoffMouseExited(evt);
+            }
+        });
+        jButtonTurnoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTurnoffActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jButtonTurnoff, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 10, 52, 50));
+
+        jButtonVolume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/10.png"))); // NOI18N
+        jButtonVolume.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonVolumeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonVolumeMouseExited(evt);
+            }
+        });
+        jButtonVolume.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolumeActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jButtonVolume, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 52, 50));
+
+        jSVolumen.setVisible(false);
+        jSVolumen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jSVolumenMousePressed(evt);
+            }
+        });
+        jPBotonera.add(jSVolumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 130, -1));
+
+        jButtonStop.setBackground(new java.awt.Color(204, 204, 0));
+        jButtonStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/7.png"))); // NOI18N
+        jButtonStop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonStopMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonStopMouseExited(evt);
+            }
+        });
+        jButtonStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStopActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jButtonStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 52, 50));
+
+        jButtonForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/6.png"))); // NOI18N
+        jButtonForward.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonForwardMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonForwardMouseExited(evt);
+            }
+        });
+        jButtonForward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonForwardActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jButtonForward, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 52, 50));
+
+        jButtonRewind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/5.png"))); // NOI18N
+        jButtonRewind.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRewindMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRewindMouseExited(evt);
+            }
+        });
+        jButtonRewind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRewindActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jButtonRewind, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 52, 50));
+
+        jButtonSkip.setBackground(new java.awt.Color(0, 153, 153));
+        jButtonSkip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/3.png"))); // NOI18N
+        jButtonSkip.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonSkipMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonSkipMouseExited(evt);
+            }
+        });
+        jPBotonera.add(jButtonSkip, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 52, 50));
+
+        jButtonRestart.setBackground(new java.awt.Color(0, 153, 153));
+        jButtonRestart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/4.png"))); // NOI18N
+        jButtonRestart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonRestartMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonRestartMouseExited(evt);
+            }
+        });
+        jPBotonera.add(jButtonRestart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 52, 50));
+
+        jButtonPlayPause.setBackground(new java.awt.Color(0, 102, 51));
+        jButtonPlayPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/1.png"))); // NOI18N
+        jButtonPlayPause.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton1MouseMoved(evt);
+                jButtonPlayPauseMouseMoved(evt);
             }
         });
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonPlayPause.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                jButtonPlayPauseMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                jButtonPlayPauseMouseExited(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPlayPause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonPlayPauseActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, 52, 50));
+        jPBotonera.add(jButtonPlayPause, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 52, 50));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/4.png"))); // NOI18N
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton2MouseExited(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 690, 52, 50));
+        jProgressBar1.setValue(50);
+        jPBotonera.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 27, 240, 20));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/2.png"))); // NOI18N
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton3MouseExited(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 690, 52, 50));
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/10.png"))); // NOI18N
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton4MouseExited(evt);
-            }
-        });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jMaximizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/13.png"))); // NOI18N
+        jMaximizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jMaximizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 690, 52, 50));
+        jPBotonera.add(jMaximizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 52, 50));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/3.png"))); // NOI18N
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton5MouseExited(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 690, 52, 50));
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/5.png"))); // NOI18N
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton6MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton6MouseExited(evt);
-            }
-        });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/14.png"))); // NOI18N
+        jMinimizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jMinimizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 690, 52, 50));
+        jPBotonera.add(jMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 52, 50));
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/6.png"))); // NOI18N
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+        getContentPane().add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 1230, 80));
+        jPBotonera.setVisible(false);
+
+        jLabel1.setText("jLabel1");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton7MouseExited(evt);
+                jLabel1MouseEntered(evt);
             }
         });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 690, 52, 50));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 680));
+        jLabel1.setIcon(new ImageIcon("./maxresdefault.jpg"));
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/7.png"))); // NOI18N
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanelFalso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton8MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton8MouseExited(evt);
+                jPanelFalsoMouseEntered(evt);
             }
         });
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 690, 52, 50));
+        getContentPane().add(jPanelFalso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 1280, 140));
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/9.png"))); // NOI18N
-        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton9MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton9MouseExited(evt);
-            }
-        });
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 690, 52, 50));
+        jMenu1.setText("Archivo");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1180, 650));
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reproductormultimedia/BulkResizePhotos/on-off-button.png"))); // NOI18N
-        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton10MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton10MouseExited(evt);
-            }
-        });
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jMIAbrir.setText("Abrir archivo");
+        jMIAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jMIAbrirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 690, 52, 50));
+        jMenu1.add(jMIAbrir);
+        jMIAbrir.getAccessibleContext().setAccessibleName("jMIAbrir");
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jMIAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAbrirActionPerformed
+        JFileChooser selector = new JFileChooser();
+        selector.showOpenDialog(this);
+        File fichero = selector.getSelectedFile();
+
+
+    }//GEN-LAST:event_jMIAbrirActionPerformed
+
+    private void jPanelFalsoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelFalsoMouseEntered
+        this.jPBotonera.setVisible(true);
+    }//GEN-LAST:event_jPanelFalsoMouseEntered
+
+    private void jPBotoneraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPBotoneraMouseExited
+
+    }//GEN-LAST:event_jPBotoneraMouseExited
+
+    private void jPBotoneraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPBotoneraMouseEntered
+
+    }//GEN-LAST:event_jPBotoneraMouseEntered
+
+    private void jMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinimizarActionPerformed
+
+    }//GEN-LAST:event_jMinimizarActionPerformed
+
+    private void jMaximizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaximizarActionPerformed
+
+    }//GEN-LAST:event_jMaximizarActionPerformed
+
+    private void jButtonPlayPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlayPauseActionPerformed
+        if (reproduciendo) {
+            this.jButtonPlayPause.setIcon(iIconPausar);
+            this.jButtonPlayPause.setBackground(Color.red);
+            reproduciendo = false;
+
+        } else {
+            this.jButtonPlayPause.setIcon(iIconReproducir);
+            this.jButtonPlayPause.setBackground(new Color(0, 102, 51));
+            reproduciendo = true;
+        }
+    }//GEN-LAST:event_jButtonPlayPauseActionPerformed
+
+    private void jButtonPlayPauseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPlayPauseMouseExited
+
+    }//GEN-LAST:event_jButtonPlayPauseMouseExited
+
+    private void jButtonPlayPauseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPlayPauseMouseEntered
+
+    }//GEN-LAST:event_jButtonPlayPauseMouseEntered
+
+    private void jButtonPlayPauseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPlayPauseMouseMoved
+
+    }//GEN-LAST:event_jButtonPlayPauseMouseMoved
+
+    private void jButtonRestartMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRestartMouseExited
+        jButtonRestart.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/4.png"));
+    }//GEN-LAST:event_jButtonRestartMouseExited
+
+    private void jButtonRestartMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRestartMouseEntered
+        jButtonRestart.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/4.png"));
+    }//GEN-LAST:event_jButtonRestartMouseEntered
+
+    private void jButtonSkipMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSkipMouseExited
+        jButtonSkip.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/3.png"));
+    }//GEN-LAST:event_jButtonSkipMouseExited
+
+    private void jButtonSkipMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSkipMouseEntered
+        jButtonSkip.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/3.png"));
+    }//GEN-LAST:event_jButtonSkipMouseEntered
+
+    private void jButtonRewindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRewindActionPerformed
+        if (this.jProgressBar1.getValue() >= 5) {
+            this.jProgressBar1.setValue(this.jProgressBar1.getValue() - 5);
+        }
+    }//GEN-LAST:event_jButtonRewindActionPerformed
+
+    private void jButtonRewindMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRewindMouseExited
+        jButtonRewind.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/5.png"));
+    }//GEN-LAST:event_jButtonRewindMouseExited
+
+    private void jButtonRewindMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRewindMouseEntered
+        jButtonRewind.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/5.png"));
+    }//GEN-LAST:event_jButtonRewindMouseEntered
+
+    private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStopActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonStopActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonStopMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStopMouseExited
+        jButtonStop.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/7.png"));
+    }//GEN-LAST:event_jButtonStopMouseExited
+
+    private void jButtonStopMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStopMouseEntered
+        jButtonStop.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/7.png"));
+    }//GEN-LAST:event_jButtonStopMouseEntered
+
+    private void jSVolumenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSVolumenMousePressed
+        int volumen = jSVolumen.getValue();
+    }//GEN-LAST:event_jSVolumenMousePressed
+
+    private void jButtonVolumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolumeActionPerformed
+        if (desplegadoVolumen) {
+            jSVolumen.setVisible(true);
+            desplegadoVolumen = false;
+        } else {
+            jSVolumen.setVisible(false);
+            desplegadoVolumen = true;
+        }
+    }//GEN-LAST:event_jButtonVolumeActionPerformed
+
+    private void jButtonVolumeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVolumeMouseExited
+        jButtonVolume.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/10.png"));
+    }//GEN-LAST:event_jButtonVolumeMouseExited
+
+    private void jButtonVolumeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVolumeMouseEntered
+        jButtonVolume.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/10.png"));
+    }//GEN-LAST:event_jButtonVolumeMouseEntered
+
+    private void jButtonTurnoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTurnoffActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonTurnoffActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButtonTurnoffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTurnoffMouseExited
+        jButtonTurnoff.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/on-off-button.png"));
+    }//GEN-LAST:event_jButtonTurnoffMouseExited
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jButtonTurnoffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonTurnoffMouseEntered
+        jButtonTurnoff.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/on-off-button.png"));
+    }//GEN-LAST:event_jButtonTurnoffMouseEntered
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLabel1MouseEntered
 
-    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
-             
-    }//GEN-LAST:event_jButton1MouseMoved
+    private void jButtonForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonForwardActionPerformed
+        if (this.jProgressBar1.getMaximum() > this.jProgressBar1.getValue() - 5) {
+            this.jProgressBar1.setValue(this.jProgressBar1.getValue() + 5);
+        }
+    }//GEN-LAST:event_jButtonForwardActionPerformed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/1.png"));
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void jButtonForwardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonForwardMouseExited
+        jButtonForward.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/6.png"));
+    }//GEN-LAST:event_jButtonForwardMouseExited
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/1.png"));
-    }//GEN-LAST:event_jButton1MouseExited
-
-    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        jButton2.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/4.png"));
-    }//GEN-LAST:event_jButton2MouseEntered
-
-    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        jButton2.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/4.png"));
-    }//GEN-LAST:event_jButton2MouseExited
-
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        jButton3.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/2.png"));
-    }//GEN-LAST:event_jButton3MouseEntered
-
-    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
-        jButton3.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/2.png"));
-    }//GEN-LAST:event_jButton3MouseExited
-
-    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
-        jButton5.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/3.png"));
-    }//GEN-LAST:event_jButton5MouseEntered
-
-    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
-        jButton5.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/3.png"));
-    }//GEN-LAST:event_jButton5MouseExited
-
-    private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
-        jButton6.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/5.png"));
-    }//GEN-LAST:event_jButton6MouseEntered
-
-    private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
-        jButton6.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/5.png"));
-    }//GEN-LAST:event_jButton6MouseExited
-
-    private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
-        jButton7.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/6.png"));
-    }//GEN-LAST:event_jButton7MouseEntered
-
-    private void jButton7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseExited
-        jButton7.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/6.png"));
-    }//GEN-LAST:event_jButton7MouseExited
-
-    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
-        jButton8.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/7.png"));
-    }//GEN-LAST:event_jButton8MouseEntered
-
-    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
-        jButton8.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/7.png"));
-    }//GEN-LAST:event_jButton8MouseExited
-
-    private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
-        jButton9.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/9.png"));
-    }//GEN-LAST:event_jButton9MouseEntered
-
-    private void jButton9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseExited
-        jButton9.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/9.png"));
-    }//GEN-LAST:event_jButton9MouseExited
-
-    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
-        jButton4.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/10.png"));
-    }//GEN-LAST:event_jButton4MouseEntered
-
-    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        jButton4.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/10.png"));
-    }//GEN-LAST:event_jButton4MouseExited
-
-    private void jButton10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseEntered
-        jButton10.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/on-off-button.png"));
-    }//GEN-LAST:event_jButton10MouseEntered
-
-    private void jButton10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseExited
-        jButton10.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos/on-off-button.png"));
-    }//GEN-LAST:event_jButton10MouseExited
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void jButtonForwardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonForwardMouseEntered
+        jButtonForward.setIcon(new ImageIcon("./src/reproductormultimedia/BulkResizePhotos20/6.png"));
+    }//GEN-LAST:event_jButtonForwardMouseEntered
 
     /**
      * @param args the command line arguments
@@ -341,16 +443,23 @@ public class ReproductorMultimedia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButtonForward;
+    private javax.swing.JButton jButtonPlayPause;
+    private javax.swing.JButton jButtonRestart;
+    private javax.swing.JButton jButtonRewind;
+    private javax.swing.JButton jButtonSkip;
+    private javax.swing.JButton jButtonStop;
+    private javax.swing.JButton jButtonTurnoff;
+    private javax.swing.JButton jButtonVolume;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMIAbrir;
+    private javax.swing.JButton jMaximizar;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton jMinimizar;
+    private javax.swing.JPanel jPBotonera;
+    private javax.swing.JPanel jPanelFalso;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JSlider jSVolumen;
     // End of variables declaration//GEN-END:variables
 }
